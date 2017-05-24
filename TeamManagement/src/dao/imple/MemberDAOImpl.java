@@ -12,21 +12,26 @@ import dto.MemberDTO;
 
 public class MemberDAOImpl extends SimpleJdbcTemplate implements MemberDAO{
 	private InsertMember insertMember;
+	private MembersQuery membersQuery;
+	private MemberQuery memberQuery;
+	private DeleteMember deleteMember;
 	
 	public MemberDAOImpl(DataSource dataSource){
 		super(dataSource);
 		insertMember=new InsertMember(dataSource);
+		membersQuery=new MembersQuery(dataSource);
+		memberQuery=new MemberQuery(dataSource);
+		deleteMember=new DeleteMember(dataSource);
 	}
 	@Override
 	public List getMembers(Integer id) throws DataAccessException {
-		
-		return null;
+		System.out.println(id);
+		return membersQuery.execute(id);
 	}
 
 	@Override
 	public MemberDTO getMember(Integer id) throws DataAccessException {
-		
-		return null;
+		return (MemberDTO)memberQuery.execute(id).get(0);
 	}
 
 	@Override
@@ -37,7 +42,8 @@ public class MemberDAOImpl extends SimpleJdbcTemplate implements MemberDAO{
 
 	@Override
 	public void deleteMember(MemberDTO member) throws DataAccessException {
-		
+		Object[] values=new Object[]{member.getId()};
+		deleteMember.update(values);
 	}
 
 	@Override

@@ -12,7 +12,6 @@ public class InsertMember extends SqlUpdate{
 		super(dataSource, "insert into member values(seq_member_id.nextval,?,?)");
 		super.declareParameter(new SqlParameter("name",Types.VARCHAR));
 		super.declareParameter(new SqlParameter("team_id",Types.INTEGER));
-		
 		compile();
 	}
 }

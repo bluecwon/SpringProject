@@ -18,4 +18,35 @@
 			<ref bean="dataSource"/>
 		</constructor-arg>
 	</bean>
+	
+	<bean id="teamDAO" class="dao.imple.TeamDAOImpl">
+		<constructor-arg>
+			<ref bean="dataSource"/>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="selectTeamView" class="view.SelectTeamView">
+		<property name="teamDAO" ref="teamDAO"/>
+	</bean>
+	
+	<bean id="insertMemberView" class="view.InsertMemberView">
+		<property name="memberDAO" ref="memberDAO"/>
+		<property name="teamDAO" ref="teamDAO"/>
+	</bean>
+	
+	<bean id="mainView" class="view.MainView">
+		<property name="selectTeamView" ref="selectTeamView"/>
+		<property name="insertMemberView" ref="insertMemberView"/>
+		<property name="managementMemberView" ref="managementMemberView"/>
+	</bean>
+	
+	<bean id="deleteMemberView" class="view.DeleteMemberView">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	
+	<bean id="managementMemberView" class="view.ManagementMemberView">
+		<property name="memberDAO" ref="memberDAO"/>
+		<property name="deleteMemberView" ref="deleteMemberView"/>
+	</bean>
+	
 </beans>
