@@ -15,6 +15,7 @@ public class MemberDAOImpl extends SimpleJdbcTemplate implements MemberDAO{
 	private MembersQuery membersQuery;
 	private MemberQuery memberQuery;
 	private DeleteMember deleteMember;
+	private UpdateMember updateMember;
 	
 	public MemberDAOImpl(DataSource dataSource){
 		super(dataSource);
@@ -22,16 +23,16 @@ public class MemberDAOImpl extends SimpleJdbcTemplate implements MemberDAO{
 		membersQuery=new MembersQuery(dataSource);
 		memberQuery=new MemberQuery(dataSource);
 		deleteMember=new DeleteMember(dataSource);
+		updateMember=new UpdateMember(dataSource);
 	}
 	@Override
 	public List getMembers(Integer id) throws DataAccessException {
-		System.out.println(id);
 		return membersQuery.execute(id);
 	}
 
 	@Override
 	public MemberDTO getMember(Integer id) throws DataAccessException {
-		return (MemberDTO)memberQuery.execute(id).get(0);
+		return (MemberDTO)memberQuery.findObject(id);
 	}
 
 	@Override
@@ -48,7 +49,8 @@ public class MemberDAOImpl extends SimpleJdbcTemplate implements MemberDAO{
 
 	@Override
 	public void updateMember(MemberDTO member) throws DataAccessException {
-		
+		Object[] values=new Object[]{member.getTeam().getId(),member.getId()};
+		updateMember.update(values);
 	}
 
 }

@@ -3,15 +3,13 @@ package view;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import swing.MainFrame;
+
 public abstract class AbsViewTemplate extends AbsView{
 
 	@Override
 	public void show() {
 		showMenu();
-		String input=getKeyInputString("¹øÈ£");
-		if(isValidNumber(input)){
-			execute(NumberUtils.toInt(input));
-		}
 	}
 	
 	protected boolean isValidNumber(String str){

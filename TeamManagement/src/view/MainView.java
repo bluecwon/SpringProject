@@ -3,12 +3,19 @@ package view;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import swing.MainFrame;
+import swing.ManagementFrame;
+
 public class MainView extends AbsViewTemplate {
 	
 	private SelectTeamView selectTeamView;
 	private InsertMemberView insertMemberView;
 	private ManagementMemberView managementMemberView;
-	
+	private MainFrame mainFrame;
+
+	public void setMainFrame(MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
+	}
 	public void setSelectTeamView(SelectTeamView selectTeamView) {
 		this.selectTeamView = selectTeamView;	
 	}
@@ -23,14 +30,9 @@ public class MainView extends AbsViewTemplate {
 
 	@Override
 	protected void showMenu() {
-		System.out.println("******************");
-		System.out.println("");
-		System.out.println("1.종료");
-		System.out.println("2.팀 리스트");
-		System.out.println("3.팀원 추가");
-		System.out.println("4.팀원 관리");
-		System.out.println("******************");
-		System.out.println("번호 입력(Enter)");
+		int num=mainFrame.getCommandNum();
+		System.out.println(num);
+		execute(num);
 	}
 	
 
@@ -59,6 +61,7 @@ public class MainView extends AbsViewTemplate {
 			break;
 		case 4:
 			managementMemberView.show();
+			mainFrame.setVisible(false);
 			break;
 		}
 	}
@@ -66,8 +69,7 @@ public class MainView extends AbsViewTemplate {
 	public static void main(String[] args){
 		GenericApplicationContext ac=new GenericXmlApplicationContext("appContext.xml");
 		MainView mu=(MainView)ac.getBean("mainView");
-		
-		while(true){
+		while(true){	
 			mu.show();
 		}
 	}

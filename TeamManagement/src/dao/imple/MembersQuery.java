@@ -20,7 +20,6 @@ public class MembersQuery extends MappingSqlQuery {
 	
 	public MembersQuery(DataSource dataSource){
 		super(dataSource, sql);
-		System.out.println(sql);
 		super.declareParameter(new SqlParameter("team_id", Types.INTEGER));
 		compile();
 	}

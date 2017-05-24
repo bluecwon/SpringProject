@@ -3,15 +3,31 @@ package view;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang.math.NumberUtils;
-
 import dao.MemberDAO;
 import dto.MemberDTO;
+import swing.MainFrame;
+import swing.ManagementFrame;
 
 public class ManagementMemberView extends AbsViewTemplate {
 	
 	private MemberDAO memberDAO;
 	private DeleteMemberView deleteMemberView;
+	private UpdateMemberView updateMemberView;
+	private ManagementFrame managementFrame;
+	private MainFrame mainFrame;
+	
+
+	public void setMainFrame(MainFrame mainFrame) {
+		this.mainFrame = mainFrame;
+	}
+
+	public void setManagementFrame(ManagementFrame managementFrame) {
+		this.managementFrame = managementFrame;
+	}
+
+	public void setUpdateMemberView(UpdateMemberView updateMemberView) {
+		this.updateMemberView = updateMemberView;
+	}
 
 	public void setMemberDAO(MemberDAO memberDAO) {
 		this.memberDAO = memberDAO;
@@ -27,31 +43,25 @@ public class ManagementMemberView extends AbsViewTemplate {
 		if(Utils.isEmpty(id, teamId)) return;
 		if(Utils.isNumeric(id, teamId)){
 			showMemberList(memberDAO.getMembers(Integer.valueOf(id)));
+			managementFrame.setVisible(true);
 		}
-		msg("Enter를 누르세요");
-		getEnter();
 		super.show();
 	}
 	
 	protected void showMemberList(List memberList){
-		System.out.println("*************************************");
-		System.out.println(">> 멤버리스트");
-		System.out.println("-------------------------------------");
+		String str=">> 멤버리스트\n"+"팀ID\t팀이름\t선수ID\t선수이름\n";
 		for(Iterator it=memberList.iterator();it.hasNext();){
 			MemberDTO member=(MemberDTO)it.next();
-			System.out.println(member.getTeam().getId()+"\t"+member.getTeam().getName()+"\t"+member.getId()+"\t"+member.getName());
+			str+=member.getTeam().getId()+"\t"+member.getTeam().getName()+"\t"+member.getId()+"\t"+member.getName()+"\n";
 		}
+		managementFrame.getTa().setText(str);
 	}
 	
 	@Override
 	protected void showMenu() {
-		System.out.println("******************");
-		System.out.println("");
-		System.out.println("1.뒤로 가기");
-		System.out.println("2.멤버 삭제");
-		System.out.println("3.멤버 수정");
-		System.out.println("******************");
-		System.out.println("번호 입력(Enter)");
+		int num=managementFrame.getCommandNum();
+		System.out.println(num);
+		execute(num);
 	}
 
 	@Override
@@ -68,11 +78,14 @@ public class ManagementMemberView extends AbsViewTemplate {
 	protected void execute(int number) {
 		switch(number){
 		case 1:
+			mainFrame.setVisible(true);
+			managementFrame.setVisible(false);
 			return;
 		case 2:
 			deleteMemberView.show();
 			break;
 		case 3:
+			updateMemberView.show();
 			break;
 		}
 	}
