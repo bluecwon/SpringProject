@@ -30,10 +30,9 @@
 			</tr>
 			<tr>
 				<td colspan="4" align="right">
-				<input type="button" value="글삭제">
-				<input type="button" value="글수정">
-				<input type="button" value="답글쓰기">
-				<input type="button" value="목록보기">
+				<input type="button" value="글삭제" onclick="window.location='board_delete_form.do?num=${content.num}'">
+				<input type="button" value="글수정" onclick="window.location='board_update_form.do?num=${content.num}'">
+				<input type="button" value="목록보기" onclick="window.location='board_list.do'">
 				</td>
 			</tr>
 		</table>

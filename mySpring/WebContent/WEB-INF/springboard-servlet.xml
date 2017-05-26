@@ -34,4 +34,18 @@
 	<bean name="/board_content.do" class="board.controller.BoardContentController">
 		<property name="boardDAO" ref="boardDAO"/>
 	</bean>
+	<bean name="/board_delete.do" class="board.controller.BoardDeleteController">
+		<property name="boardDAO" ref="boardDAO"/>
+	</bean>
+	<bean name="/insert_form.do" class="board.controller.InsertFormController"/>
+	<bean name="/board_insert.do" class="board.controller.BoardInsertController">
+		<property name="boardDAO" ref="boardDAO"/>
+	</bean>
+	<bean name="/board_update.do" class="board.controller.BoardUpdateController">
+		<property name="boardDAO" ref="boardDAO"/>
+	</bean>
+	<bean name="/board_delete_form.do" class="board.controller.DeleteFormController"/>
+	<bean name="/board_update_form.do" class="board.controller.UpdateFormController">
+		<property name="boardDAO" ref="boardDAO"/>
+	</bean>
 </beans>
