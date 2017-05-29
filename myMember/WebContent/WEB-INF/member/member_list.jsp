@@ -28,7 +28,12 @@
 				<td align="center">${dto.email}</td>
 				<td align="center">${dto.hp1}-${dto.hp2}-${dto.hp3}</td>
 				<td align="center">${dto.joindate}</td>
-				<td align="center"><a href="member_delete.do?num=${dto.no}">삭제</a></td>
+				<td align="center">
+				<c:if test="${dto.id!='admin' }">
+					<a href="member_delete.do?num=${dto.no}">삭제</a>
+				</c:if>
+				<c:if test="${dto.id=='admin' }"><font color="red">불가</font></c:if>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

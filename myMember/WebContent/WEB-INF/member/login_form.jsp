@@ -30,12 +30,12 @@
 	<table width="400" class="outline" border="1" align="center">
 		<tr>
 			<td class="m2" width="20%">아이디 : </td>
-			<td><input name="id" type="text"></td>
-			<td rowspan="2" valign="middle" align="left"><input type="button" value="로그인" onclick="javascript:loginCheck();"></td>
+			<td><input name="id" type="text" tabindex="1"></td>
+			<td rowspan="2" valign="middle" align="left"><input type="button" value="로그인" tabindex="3" onclick="javascript:loginCheck();"></td>
 		</tr>
 		<tr>
 			<td class="m2" width="20%">패스워드 : </td>
-			<td><input name="passwd" type="password"></td>
+			<td><input name="passwd" type="password" tabindex="2"></td>
 		</tr>
 		<tr>
 			<td colspan="3">
