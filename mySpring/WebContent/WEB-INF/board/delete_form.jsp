@@ -11,7 +11,7 @@
 		<font size="4"><b>글 삭제</b></font>
 		<hr color=green width="300">
 	</div>
-		<table align="center" border="1" width="300">
+		<table align="center" border="1" width="300" class="outline">
 		<form name="f" action="board_delete.do" method="post">
 				<tr>
 					<td class="m2" align="center">비밀번호를 입력해 주세요.</td>

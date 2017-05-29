@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@localhost:1521:xe</value>
+		</property>
+		<property name="username" value="big01"/>
+		<property name="password" value="big01"/>
+	</bean>
+		
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="memberDAO" class="member.dao.MemberDAOImple">
+		<property name="jdbcTemplate" ref="jdbcTemplate"/>
+	</bean>
+	
+	<bean id="/member_login_form.do" class="member.controller.LoginFormController"/>
+	<bean id="/member_login.do" class="member.controller.MemberLoginController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	<bean id="/member_check_form.do" class="member.controller.MemberCheckFormController"/>
+	<bean id="/member_check.do" class="member.controller.MemberCheckController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	<bean id="/member_insert_form.do" class="member.controller.MemberInsertFormController"/>
+	<bean id="/member_insert.do" class="member.controller.MemberInsertController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	<bean id="/member_list.do" class="member.controller.MemberListController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	<bean id="/member_logout.do" class="member.controller.MemberLogoutController"/>
+	<bean id="/member_info.do" class="member.controller.MemberInfoController"/>
+	<bean id="/member_find_id_form.do" class="member.controller.MemberFindIDFormController"/>
+	<bean id="/member_find_id.do" class="member.controller.MemberFindIDController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	<bean id="/member_find_pw_form.do" class="member.controller.MemberFindPWFormController"/>
+	<bean id="/member_find_pw.do" class="member.controller.MemberFindPWController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	<bean id="/member_delete.do" class="member.controller.MemberDeleteController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+	<bean id="/member_update_form.do" class="member.controller.MemberUpdateFormController"/>
+	<bean id="/member_update.do" class="member.controller.MemberUpdateController">
+		<property name="memberDAO" ref="memberDAO"/>
+	</bean>
+</beans>

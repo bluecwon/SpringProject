@@ -36,16 +36,7 @@
     <!-- Editable user database that can also be used by
          UserDatabaseRealm to authenticate users
     -->
-    <Resource auth="Container" 
-    				driverClassName="oracle.jdbc.driver.OracleDriver" 
-    				maxAction="20" 
-    				maxIdle="10" 
-    				maxWait="-1" 
-    				name="jdbc/oracle" 
-    				password="big01" 
-    				type="javax.sql.DataSource" 
-    				url="jdbc:oracle:thin:@localhost:1521:xe" 
-    				username="big01"/>
+    <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxAction="20" maxIdle="10" maxWait="-1" name="jdbc/oracle" password="big01" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="big01"/>
     <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
   </GlobalNamingResources>
 
@@ -136,9 +127,9 @@
 		
       <Context docBase="mySpring" path="/mySpring" reloadable="true" source="org.eclipse.jst.jee.server:mySpring">
       <!-- 글로벌에서 등록된 자원을 연결함 -->
-      	<ResourceLink name="jdbc/oracle" global="jdbc/oracle" type="javax.sql.DataSource"/>
+      	<ResourceLink global="jdbc/oracle" name="jdbc/oracle" type="javax.sql.DataSource"/>
       </Context>
-      </Host>
+      <Context docBase="myMember" path="/myMember" reloadable="true" source="org.eclipse.jst.jee.server:myMember"/></Host>
     </Engine>
   </Service>
 </Server>

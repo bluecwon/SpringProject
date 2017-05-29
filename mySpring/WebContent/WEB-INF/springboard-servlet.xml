@@ -37,9 +37,15 @@
 	<bean name="/board_delete.do" class="board.controller.BoardDeleteController">
 		<property name="boardDAO" ref="boardDAO"/>
 	</bean>
-	<bean name="/insert_form.do" class="board.controller.InsertFormController"/>
+	<bean name="/insert_form.do" class="board.controller.InsertFormController">
+		<!-- <property name="supprotedMethods">
+			<value>GET,POST</value>
+		</property> -->
+	</bean>
 	<bean name="/board_insert.do" class="board.controller.BoardInsertController">
 		<property name="boardDAO" ref="boardDAO"/>
+		<property name="commandClass" value="board.dto.BoardDBBean"/>
+		<property name="commandName" value="boardCmd"/>
 	</bean>
 	<bean name="/board_update.do" class="board.controller.BoardUpdateController">
 		<property name="boardDAO" ref="boardDAO"/>
