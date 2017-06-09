@@ -20,6 +20,9 @@
 		}
 		document.f.submit()
 	}
+	function back(){
+		history.back();
+	}
 	</script>
 <html>
 <head>
@@ -47,7 +50,7 @@
 				<tr>
   					<td align="center" colspan="2">
 						<a href="javascript:check()">[전송]</a>
-						<a href="index.jsp">[취소]</a>
+						<a href="javascript:back()">[취소]</a>
 					</td>
   				</tr>
   			</table>

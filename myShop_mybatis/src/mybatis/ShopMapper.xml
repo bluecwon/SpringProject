@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper 
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="mybatis.ShopMapper">
+
+  <select id="listCate" resultType="CateDTO">
+    select * from category
+  </select>
+  
+  <select id="searchCname" parameterType="string" resultType="cateDTO">
+    select * from category where code = #{code}
+  </select>
+  
+  <insert id="inputCate" parameterType="cateDTO">
+  	insert into category values(
+  		cate_seq.nextval,
+  		#{code},
+  		#{cname})
+  </insert>
+  
+  <delete id="deleteCate" parameterType="int">
+  	delete from category 
+  	where 
+  		cnum=#{cnum}
+  </delete>
+  
+  <insert id="inputProduct" parameterType="prodDTO">
+  	insert into product values(
+  		prod_seq.nextval,
+  		#{pname},
+  		#{pcategory_fk},
+  		#{pcompany},
+  		#{pimage},
+  		#{pqty},
+  		#{price},
+  		#{pspec},
+  		#{pcontents},
+  		#{point},
+  		sysdate)
+  </insert>
+  
+  <select id="listProduct" resultType="ProdDTO">
+  	select * from product
+  </select>
+  
+  <select id="getProduct" parameterType="int" resultType="prodDTO">
+  	select * from product where pnum=#{pnum}
+  </select>
+  
+  <delete id="deleteProduct" parameterType="int">
+  	delete from product where pnum=#{pnum}
+  </delete>
+  
+  <update id="updateProduct" parameterType="prodDTO">
+  	update product set 
+  		pname=#{pname}, 
+  		pcompany=#{pcompany}, 
+  		pimage=#{pimage}, 
+  		pqty=#{pqty}, 
+  		price=#{price}, 
+  		pspec=#{pspec}, 
+  		pcontents=#{pcontents},
+		point=#{point}
+	where 
+		pnum=#{pnum}
+  </update>
+  
+  <select id="listSpecProduct" parameterType="string" resultType="ProdDTO">
+  	select * from Product where pspec=#{pspec}
+  </select>
+  
+  <select id="listCateProduct" parameterType="string" resultType="ProdDTO">
+  	select * from Product where pcategory_fk like '%'||#{cate}||'%'
+  </select>
+</mapper>

@@ -2,6 +2,11 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript">
+	function back(){
+		history.back();
+	}
+</script>
 <html>
 <head>
 <title>내정보 확인</title>
@@ -30,7 +35,7 @@
 		<tr>
 			<td colspan="6" align="right">
 				<a href="member_update_form.do">내 정보수정</a> | 
-				<a href="index.jsp">뒤로</a>
+				<a href="javascript:back()">뒤로</a>
 			</td>
 		</tr>
 	</table>

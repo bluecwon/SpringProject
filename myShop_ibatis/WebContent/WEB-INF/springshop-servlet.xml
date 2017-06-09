@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-3.1.xsd
+						">
+	
+	<context:annotation-config/>
+	
+	<bean id="cateDAO" class="cate.dao.CateDAOImpl">
+	</bean>
+	
+	<bean id="cateController" class="cate.controller.CateController">
+	</bean>
+	
+	<bean id="productDAO" class="prod.dao.ProductDAOImpl">
+	</bean>
+	
+	<bean id="prodController" class="prod.controller.ProductController">
+	</bean>
+	
+	<bean id="mallController" class="mall.controller.MallController">
+	</bean>
+	
+	<bean id="mallProductList" class="mall.bean.MallProductList">
+	</bean>
+	
+	<bean id="mallCartBean" class="mall.bean.MallCartBean">
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+</beans>

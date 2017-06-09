@@ -129,7 +129,7 @@
       <!-- 글로벌에서 등록된 자원을 연결함 -->
       	<ResourceLink global="jdbc/oracle" name="jdbc/oracle" type="javax.sql.DataSource"/>
       </Context>
-      <Context docBase="myMember" path="/myMember" reloadable="true" source="org.eclipse.jst.jee.server:myMember"/></Host>
+      <Context docBase="myMember" path="/myMember" reloadable="true" source="org.eclipse.jst.jee.server:myMember"/><Context docBase="myShop" path="/myShop" reloadable="true" source="org.eclipse.jst.jee.server:myShop"/><Context docBase="myShop_ibatis" path="/myShop_ibatis" reloadable="true" source="org.eclipse.jst.jee.server:myShop_ibatis"/><Context docBase="mySpring2_mybatis" path="/mySpring2_mybatis" reloadable="true" source="org.eclipse.jst.jee.server:mySpring2_mybatis"/><Context docBase="myShop_mybatis" path="/myShop_mybatis" reloadable="true" source="org.eclipse.jst.jee.server:myShop_mybatis"/></Host>
     </Engine>
   </Service>
 </Server>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="cateDTO" type="cate.dto.CateDTO"/>
+  <typeAlias alias="prodDTO" type="prod.dto.ProductDTO"/>
+
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties 
+       exactly. -->
+  <resultMap id="CateResult" class="cateDTO">
+    <result property="cnum" column="cnum"/>
+    <result property="code" column="code"/>
+    <result property="cname" column="cname"/>
+  </resultMap>
+  
+   <resultMap id="ProdResult" class="prodDTO">
+    <result property="pnum" column="pnum"/>
+    <result property="pname" column="pname"/>
+    <result property="pcategory_fk" column="pcategory_fk"/>
+    <result property="pcompany" column="pcompany"/>
+    <result property="pimage" column="pimage"/>
+    <result property="pqty" column="pqty"/>
+    <result property="price" column="price"/>
+    <result property="pspec" column="pspec"/>
+    <result property="pcontents" column="pcontents"/>
+    <result property="point" column="point"/>
+    <result property="pinputdate" column="pinputdate"/>
+  </resultMap>
+
+  <select id="listCate" resultMap="CateResult">
+    select * from category
+  </select>
+  
+  <select id="searchCname" parameterClass="string" resultClass="cateDTO">
+    select * from category where code = #code#
+  </select>
+  
+  <insert id="inputCate" parameterClass="cateDTO">
+  	insert into category values(
+  		cate_seq.nextval,
+  		#code#,
+  		#cname#)
+  </insert>
+  
+  <delete id="deleteCate" parameterClass="int">
+  	delete from category 
+  	where 
+  		cnum=#cnum#
+  </delete>
+  
+  <insert id="inputProduct" parameterClass="prodDTO">
+  	insert into product values(
+  		prod_seq.nextval,
+  		#pname#,
+  		#pcategory_fk#,
+  		#pcompany#,
+  		#pimage#,
+  		#pqty#,
+  		#price#,
+  		#pspec#,
+  		#pcontents#,
+  		#point#,
+  		sysdate)
+  </insert>
+  
+  <select id="listProduct" resultMap="ProdResult">
+  	select * from product
+  </select>
+  
+  <select id="getProduct" parameterClass="int" resultClass="prodDTO">
+  	select * from product where pnum=#pnum#
+  </select>
+  
+  <delete id="deleteProduct" parameterClass="int">
+  	delete from product where pnum=#pnum#
+  </delete>
+  
+  <update id="updateProduct" parameterClass="prodDTO">
+  	update product set 
+  		pname=#pname#, 
+  		pcompany=#pcompany#, 
+  		pimage=#pimage#, 
+  		pqty=#pqty#, 
+  		price=#price#, 
+  		pspec=#pspec#, 
+  		pcontents=#pcontents#,
+		point=#point#
+	where 
+		pnum=#pnum#
+  </update>
+  
+  <select id="listSpecProduct" parameterClass="string" resultMap="ProdResult">
+  	select * from Product where pspec=#pspec#
+  </select>
+  
+  <select id="listCateProduct" parameterClass="string" resultMap="ProdResult">
+  	select * from Product where pcategory_fk like '%'||#cate#||'%'
+  </select>
+</sqlMap>

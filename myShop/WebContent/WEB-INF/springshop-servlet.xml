@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context-3.1.xsd
+						">
+	
+	<context:annotation-config/>
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@localhost:1521:xe</value>
+		</property>
+		<property name="username" value="big01"/>
+		<property name="password" value="big01"/>
+	</bean>
+		
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="cateDAO" class="cate.dao.CateDAOImpl">
+		<!-- <property name="jdbcTemplate" ref="jdbcTemplate"/> -->
+	</bean>
+	
+	<bean id="cateController" class="cate.controller.CateController">
+		<!-- <property name="cateDAO" ref="cateDAO"/> -->
+	</bean>
+	
+	<bean id="productDAO" class="prod.dao.ProductDAOImpl">
+		<!-- <property name="jdbcTemplate" ref="jdbcTemplate"/> -->
+	</bean>
+	
+	<bean id="prodController" class="prod.controller.ProductController">
+		<!-- <property name="productDAO" ref="productDAO"/>
+		<property name="cateDAO" ref="cateDAO"/> -->
+	</bean>
+	
+	<bean id="mallController" class="mall.controller.MallController">
+		<!-- <property name="mallProductList" ref="mallProductList"/>
+		<property name="cateDAO" ref="cateDAO"/>
+		<property name="mallCartBean" ref="mallCartBean"/> -->
+	</bean>
+	
+	<bean id="mallProductList" class="mall.bean.MallProductList">
+		<!-- <property name="jdbcTemplate" ref="jdbcTemplate"/> -->
+	</bean>
+	
+	<bean id="mallCartBean" class="mall.bean.MallCartBean">
+		<!-- <property name="mallProductList" ref="mallProductList"/> -->
+	</bean>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+</beans>
